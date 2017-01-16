@@ -9,10 +9,15 @@ class TowerOfHanoi(object):
     c = deque([])
     
     def __init__(self, n):
-	for x in range(n, 0, -1):
+	for x in range(1, n+1):
 	    self.a.append( tower_disk.Disk( x, 'A' ) )
-            print "a = ", self.a
-         
+
+    def moveDisk( self, s, d1, d2, nodeCount ):
+        print "a ",s,"\n"
+        print "b ",d1,"\n"
+        print "c ",d2,"\n"
+        d1.append( s.pop() )
+        
 
 if __name__ == '__main__':
 
@@ -21,15 +26,28 @@ if __name__ == '__main__':
     print n
     toh = TowerOfHanoi(n)
 
-    i = toh.a.pop()
     print "Now a = ", toh.a
-    print "i = ", i
+    for node in toh.a:
+        print str( node )
 
-    i = toh.a.pop()
-    print "Now a = ", toh.a
-    print "i = ", i
+    nodeCount = n % 3
+    if nodeCount == 0:
+       nodeCount = 3;
 
-    i = toh.a.pop()
-    print "Now a = ", toh.a
-    print "i = ", i
-    
+    toh.moveDisk( toh.a, toh.b, toh.c, nodeCount );
+
+    print "back in main...\n"
+    print "a ",toh.a,"\n"
+    print "b ",toh.b,"\n"
+    print "c ",toh.c,"\n"
+
+    for node in toh.a:
+        print str( node )
+
+    print '---------------------\n'
+
+    for node in toh.b:
+        print str( node )
+
+
+

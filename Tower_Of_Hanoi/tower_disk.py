@@ -10,6 +10,9 @@ class Disk(object):
     def print_disk(self):
        return "[ " + str(self.id) +" | " + self.tower + " ]"
 
+    def pretty_print_disk(self):
+       return "[ " + str(self.id) +" | " + self.tower + " ]"
+
     def __str__(self):
        return str( self.id )
 
