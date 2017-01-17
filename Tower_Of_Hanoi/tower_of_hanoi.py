@@ -34,20 +34,22 @@ if __name__ == '__main__':
     if nodeCount == 0:
        nodeCount = 3;
 
-    toh.moveDisk( toh.a, toh.b, toh.c, nodeCount );
+    #toh.moveDisk( toh.a, toh.b, toh.c, nodeCount );
+
+    #for node in toh.a:
+    #    print str( node )
+
+    print '---------------------\n'
+
+    #for node in toh.b:
+    #    print str( node )
+
+    if len( toh.a ) == n:
+        toh.c.append( toh.a.pop() ); 
+        toh.b.append( toh.a.pop() ); 
 
     print "back in main...\n"
     print "a ",toh.a,"\n"
     print "b ",toh.b,"\n"
     print "c ",toh.c,"\n"
-
-    for node in toh.a:
-        print str( node )
-
-    print '---------------------\n'
-
-    for node in toh.b:
-        print str( node )
-
-
 
