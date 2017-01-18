@@ -12,11 +12,37 @@ class TowerOfHanoi(object):
 	for x in range(1, n+1):
 	    self.a.append( tower_disk.Disk( x, 'A' ) )
 
-    def moveDisk( self, s, d1, d2, nodeCount ):
+    def prettyPrint( self, t ):
+        qLen = len( t )
+        retStr = "[ "
+        for i in range( 1, qLen+1 ):
+           retStr = retStr + str( i );
+           if i < qLen:
+              retStr = retStr + ","
+        retStr = retStr + " ]"
+        return retStr
+        
+
+    def moveDisks( self, s, d1, d2, nodeCount):
         print "a ",s,"\n"
         print "b ",d1,"\n"
         print "c ",d2,"\n"
+        
+        d2.append( s.pop() )
+        if nodeCount == 1:
+           return;
+        
         d1.append( s.pop() )
+        d1.append( d2.pop() )
+        if nodeCount == 2:
+           return;
+
+        d2.append( s.pop() )
+        s.append( d1.pop() )
+        d2.append( d1.pop() )
+        d2.append( s.pop() )
+        
+
         
 
 if __name__ == '__main__':
@@ -26,30 +52,31 @@ if __name__ == '__main__':
     print n
     toh = TowerOfHanoi(n)
 
-    print "Now a = ", toh.a
-    for node in toh.a:
-        print str( node )
+    print "before move in main...\n"
+    print "a ",toh.a,"\n"
+    print "b ",toh.b,"\n"
+    print "c ",toh.c,"\n"
+
+    print "pretty print a", toh.prettyPrint(toh.a)
+    print "pretty print b", toh.prettyPrint(toh.b)
+    print "pretty print c", toh.prettyPrint(toh.c)
+
 
     nodeCount = n % 3
     if nodeCount == 0:
        nodeCount = 3;
 
-    #toh.moveDisk( toh.a, toh.b, toh.c, nodeCount );
-
-    #for node in toh.a:
-    #    print str( node )
+    toh.moveDisks( toh.a, toh.b, toh.c, nodeCount );
 
     print '---------------------\n'
-
-    #for node in toh.b:
-    #    print str( node )
-
-    if len( toh.a ) == n:
-        toh.c.append( toh.a.pop() ); 
-        toh.b.append( toh.a.pop() ); 
 
     print "back in main...\n"
     print "a ",toh.a,"\n"
     print "b ",toh.b,"\n"
     print "c ",toh.c,"\n"
+
+    print "pretty print a", toh.prettyPrint(toh.a)
+    print "pretty print b", toh.prettyPrint(toh.b)
+    print "pretty print c", toh.prettyPrint(toh.c)
+
 
