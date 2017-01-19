@@ -7,6 +7,7 @@ class TowerOfHanoi(object):
     a = deque([])
     b = deque([])
     c = deque([])
+    moves = 0
     
     def __init__(self, n):
 	for x in range(1, n+1):
@@ -29,11 +30,13 @@ class TowerOfHanoi(object):
         print "c ",d2,"\n"
         
         d2.append( s.pop() )
+        self.moves += 1
         if nodeCount == 1:
            return;
         
         d1.append( s.pop() )
         d1.append( d2.pop() )
+        self.moves += 2
         if nodeCount == 2:
            return;
 
@@ -41,6 +44,7 @@ class TowerOfHanoi(object):
         s.append( d1.pop() )
         d2.append( d1.pop() )
         d2.append( s.pop() )
+        self.moves += 4
         
 
         
@@ -78,5 +82,7 @@ if __name__ == '__main__':
     print "pretty print a", toh.prettyPrint(toh.a)
     print "pretty print b", toh.prettyPrint(toh.b)
     print "pretty print c", toh.prettyPrint(toh.c)
+
+    print "N = ", n, " Moves = ", toh.moves
 
 
