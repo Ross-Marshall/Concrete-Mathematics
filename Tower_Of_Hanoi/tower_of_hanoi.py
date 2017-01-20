@@ -1,17 +1,22 @@
 import sys
 from collections import deque
+from Queue import PriorityQueue
 import tower_disk
 
 class TowerOfHanoi(object):
 
-    a = deque([])
-    b = deque([])
-    c = deque([])
+    #a = deque([])
+    #b = deque([])
+    #c = deque([])
+    a = PriorityQueue()
+    b = PriorityQueue()
+    c = PriorityQueue()
+
     moves = 0
     
     def __init__(self, n):
 	for x in range(1, n+1):
-	    self.a.append( tower_disk.Disk( x, 'A' ) )
+	    self.a.put( tower_disk.Disk( x, 'A' ) )
 
     def prettyPrint( self, t ):
         qLen = len( t )
@@ -29,21 +34,21 @@ class TowerOfHanoi(object):
         print "b ",d1,"\n"
         print "c ",d2,"\n"
         
-        d2.append( s.pop() )
+        d2.put( s.pop() )
         self.moves += 1
         if nodeCount == 1:
            return;
         
-        d1.append( s.pop() )
-        d1.append( d2.pop() )
+        d1.put( s.pop() )
+        d1.put( d2.pop() )
         self.moves += 2
         if nodeCount == 2:
            return;
 
-        d2.append( s.pop() )
-        s.append( d1.pop() )
-        d2.append( d1.pop() )
-        d2.append( s.pop() )
+        d2.put( s.pop() )
+        s.put( d1.pop() )
+        d2.put( d1.pop() )
+        d2.put( s.pop() )
         self.moves += 4
         
 
@@ -61,9 +66,9 @@ if __name__ == '__main__':
     print "b ",toh.b,"\n"
     print "c ",toh.c,"\n"
 
-    print "pretty print a", toh.prettyPrint(toh.a)
-    print "pretty print b", toh.prettyPrint(toh.b)
-    print "pretty print c", toh.prettyPrint(toh.c)
+    #print "pretty print a", toh.prettyPrint(toh.a)
+    #print "pretty print b", toh.prettyPrint(toh.b)
+    #print "pretty print c", toh.prettyPrint(toh.c)
 
 
     nodeCount = n % 3
