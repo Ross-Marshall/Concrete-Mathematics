@@ -9,6 +9,10 @@ class TowerOfHanoi(object):
     b = []
     c = []
 
+    aLength = 0
+    bLength = 0
+    cLength = 0
+
     moves = 0
     
     def __init__(self, n):
@@ -26,13 +30,24 @@ class TowerOfHanoi(object):
               retStr = retStr + ", "
         retStr = retStr + " ]"
         return retStr
+
+    def refreshTowerLengths(self):
+        self.aLength = len( self.a )
+        self.bLength = len( self.b )
+        self.cLength = len( self.c )
         
     def checkTower(self, n, check):
        if n <= check:
            print "pretty print a", toh.prettyPrint(toh.a)
            print "pretty print b", toh.prettyPrint(toh.b)
            print "pretty print c", toh.prettyPrint(toh.c)
+           print "checkTower: Exiting..."
            sys.exit()
+
+    def prettyPrintTowers(self):
+        print "pretty print a", self.prettyPrint(toh.a)
+        print "pretty print b", self.prettyPrint(toh.b)
+        print "pretty print c", self.prettyPrint(toh.c)
 
     def moveDisks( self, s, d1, d2, nodeCount):
         if len( s ) == 0:
@@ -73,20 +88,34 @@ class TowerOfHanoi(object):
 
 if __name__ == '__main__':
 
+    if len( sys.argv ) == 1:
+         print "USAGE: tower_of_hanoi <tower length>\n"
+         sys.exit(-1)
+
+
     n = int( sys.argv[1] )
+    if n <= 0:
+         print "ERROR: Tower length must be 1 or greater\n"
+         sys.exit(-1)
 
-    print n
     toh = TowerOfHanoi(n)
+    toh.prettyPrintTowers()
 
-    print "pretty print a", toh.prettyPrint(toh.a)
-    print "pretty print b", toh.prettyPrint(toh.b)
-    print "pretty print c", toh.prettyPrint(toh.c)
+    print "---------------------------------"
 
+    print "n = ", n
+    if n >= 1 and n <= 3:
+        print "move disk...\n"
+        toh.moveDisks( toh.a, toh.b, toh.c, n )   
+       
+    toh.prettyPrintTowers() 
+    sys.exit()
+    
     nodeCount = n % 3
     if nodeCount == 0:
        nodeCount = 3;
 
-    nodeCount = 3;
+    #nodeCount = 3;
     toh.moveDisks( toh.a, toh.b, toh.c, nodeCount )
 
     print '---------------------\n'
@@ -105,10 +134,8 @@ if __name__ == '__main__':
 
     nodeCount = 3;
     toh.moveDisks( toh.a, toh.b, toh.c, nodeCount )
-    checkTower(self, n, 6)
-    print "pretty print a", toh.prettyPrint(toh.a)
-    print "pretty print b", toh.prettyPrint(toh.b)
-    print "pretty print c", toh.prettyPrint(toh.c)
+    toh.checkTower(n, 6)
+    
 
     toh.moveDisks( toh.c, toh.a, toh.b, nodeCount )
     print "pretty print a", toh.prettyPrint(toh.a)
