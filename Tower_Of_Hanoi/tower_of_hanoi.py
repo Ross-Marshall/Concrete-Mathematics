@@ -35,6 +35,9 @@ class TowerOfHanoi(object):
         self.aLength = len( self.a )
         self.bLength = len( self.b )
         self.cLength = len( self.c )
+
+    def traverse(self, current):
+       pass
         
     def checkTower(self, n, check):
        if n <= check:
