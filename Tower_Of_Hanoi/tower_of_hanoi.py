@@ -36,8 +36,20 @@ class TowerOfHanoi(object):
         self.bLength = len( self.b )
         self.cLength = len( self.c )
 
-    def traverse(self, current):
-       pass
+    def moveTower(self, height, fromPole, toPole, withPole):
+        if height >= 1:
+            self.moveTower(height-1, fromPole, toPole, withPole)
+            self.moveDisk(fromPole, toPole)
+            self.moveTower(height-1, withPole, toPole, fromPole)
+           
+    def moveDisk( self, fromPole, toPole ):
+        print "moving disk from ", self.prettyPrint(fromPole), " to ", self.prettyPrint(toPole) 
+        if len( fromPole ) == 0:
+            toPole.append( fromPole[0] )
+        else:
+            toPole.insert( 0, fromPole[0] )
+        del fromPole[0]
+        
         
     def checkTower(self, n, check):
        if n <= check:
@@ -104,66 +116,12 @@ if __name__ == '__main__':
     toh = TowerOfHanoi(n)
     toh.prettyPrintTowers()
 
-    print "---------------------------------"
+    if n % 2 == 1:
+        toh.moveTower( n, toh.a, toh.c, toh.b )
+    else:
+        toh.moveTower( n, toh.a, toh.b, toh.c )
 
-    print "n = ", n
-    if n >= 1 and n <= 3:
-        print "move disk...\n"
-        toh.moveDisks( toh.a, toh.b, toh.c, n )   
-       
-    toh.prettyPrintTowers() 
-    sys.exit()
-    
-    nodeCount = n % 3
-    if nodeCount == 0:
-       nodeCount = 3;
+    toh.prettyPrintTowers()
 
-    #nodeCount = 3;
-    toh.moveDisks( toh.a, toh.b, toh.c, nodeCount )
-
-    print '---------------------\n'
-    if n <= 3:
-        print "pretty print a", toh.prettyPrint(toh.a)
-        print "pretty print b", toh.prettyPrint(toh.b)
-        print "pretty print c", toh.prettyPrint(toh.c)
-        sys.exit()
-    print "N = ", n, " Moves = ", toh.moves
-
-    nodeCount = 3;
-    toh.moveDisks( toh.a, toh.c, toh.b, nodeCount )
-
-    nodeCount = 3;
-    toh.moveDisks( toh.c, toh.b, toh.a, nodeCount )
-
-    nodeCount = 3;
-    toh.moveDisks( toh.a, toh.b, toh.c, nodeCount )
-    toh.checkTower(n, 6)
-    
-
-    toh.moveDisks( toh.c, toh.a, toh.b, nodeCount )
-    print "pretty print a", toh.prettyPrint(toh.a)
-    print "pretty print b", toh.prettyPrint(toh.b)
-    print "pretty print c", toh.prettyPrint(toh.c)
-    toh.moveDisks( toh.a, toh.b, toh.c, nodeCount )
-    print "pretty print a", toh.prettyPrint(toh.a)
-    print "pretty print b", toh.prettyPrint(toh.b)
-    print "pretty print c", toh.prettyPrint(toh.c)
-    toh.moveDisks( toh.b, toh.a, toh.c, nodeCount )
-    print "pretty print a", toh.prettyPrint(toh.a)
-    print "pretty print b", toh.prettyPrint(toh.b)
-    print "pretty print c", toh.prettyPrint(toh.c)
-    toh.moveDisks( toh.c, toh.b, toh.a, nodeCount )
-    print "pretty print a", toh.prettyPrint(toh.a)
-    print "pretty print b", toh.prettyPrint(toh.b)
-    print "pretty print c", toh.prettyPrint(toh.c)
-    toh.moveDisks( toh.b, toh.a, toh.c, nodeCount )
-    print "pretty print a", toh.prettyPrint(toh.a)
-    print "pretty print b", toh.prettyPrint(toh.b)
-    print "pretty print c", toh.prettyPrint(toh.c)
-    toh.moveDisks( toh.a, toh.b, toh.c, nodeCount )
-    print "pretty print a", toh.prettyPrint(toh.a)
-    print "pretty print b", toh.prettyPrint(toh.b)
-    print "pretty print c", toh.prettyPrint(toh.c)       
-    print "N = ", n, " Moves = ", toh.moves
-
+    print "Done...\n"
 
