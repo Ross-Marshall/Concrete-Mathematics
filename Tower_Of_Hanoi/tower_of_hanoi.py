@@ -5,9 +5,9 @@ import tower_disk
 
 class TowerOfHanoi(object):
 
-    a = []
-    b = []
-    c = []
+    a = Stack()
+    b = Stack()
+    c = Stack()
 
     aLength = 0
     bLength = 0
@@ -17,7 +17,7 @@ class TowerOfHanoi(object):
     
     def __init__(self, n):
 	for x in range(1, n+1):
-	    self.a.insert( 0, tower_disk.Disk( x, 'A' ) )
+	    self.a.push( tower_disk.Disk( x, 'A' ) )
 
     def prettyPrint( self, t ):
         qLen = len( t )
@@ -32,9 +32,9 @@ class TowerOfHanoi(object):
         return retStr
 
     def refreshTowerLengths(self):
-        self.aLength = len( self.a )
-        self.bLength = len( self.b )
-        self.cLength = len( self.c )
+        self.aLength = size( self.a )
+        self.bLength = size( self.b )
+        self.cLength = size( self.c )
 
     def moveTower(self, height, fromPole, toPole, withPole):
         if height >= 1:
@@ -44,11 +44,7 @@ class TowerOfHanoi(object):
            
     def moveDisk( self, fromPole, toPole ):
         print "moving disk from ", self.prettyPrint(fromPole), " to ", self.prettyPrint(toPole) 
-        if len( fromPole ) == 0:
-            toPole.append( fromPole[0] )
-        else:
-            toPole.insert( 0, fromPole[0] )
-        del fromPole[0]
+        toPole.push( fromPole.pop() )
         
         
     def checkTower(self, n, check):
