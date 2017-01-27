@@ -2,12 +2,13 @@ import sys
 from collections import deque
 from Queue import PriorityQueue
 import tower_disk
+import Stack
 
 class TowerOfHanoi(object):
 
-    a = Stack()
-    b = Stack()
-    c = Stack()
+    a =  None # Stack()
+    b =  None #Stack()
+    c =  None #nul #Stack()
 
     aLength = 0
     bLength = 0
@@ -17,7 +18,7 @@ class TowerOfHanoi(object):
     
     def __init__(self, n):
 	for x in range(1, n+1):
-	    self.a.push( tower_disk.Disk( x, 'A' ) )
+	    self.a.push( tower_disk.Disk( x ) )
 
     def prettyPrint( self, t ):
         qLen = len( t )
@@ -109,8 +110,12 @@ if __name__ == '__main__':
          print "ERROR: Tower length must be 1 or greater\n"
          sys.exit(-1)
 
+    
     toh = TowerOfHanoi(n)
     toh.prettyPrintTowers()
+    toh.a = Stack()
+    toh.b = Stack()
+    toh.c = Stack()
 
     if n % 2 == 1:
         toh.moveTower( n, toh.a, toh.c, toh.b )
