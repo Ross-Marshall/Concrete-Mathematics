@@ -35,5 +35,7 @@ if __name__ == '__main__':
      s.initializeStack( 1 )
      s.printStack()
 
+     print '------------\n'
+
      s.initializeStack( 10 )        
      s.printStack()
